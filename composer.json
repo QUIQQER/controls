@@ -1,0 +1,27 @@
+{
+  "name": "quiqqer\/controls",
+  "type": "quiqqer-plugin",
+  "description": "QUIQQER default controls",
+  "version": "dev-master",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Henning Leutz",
+      "email": "leutz@pcsg.de",
+      "homepage": "http:\/\/www.pcsg.de",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "email": "support@pcsg.de",
+    "url": "http:\/\/www.pcsg.de"
+  },
+  "require": {
+    "php": ">=5.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "QUI\\": "src"
+    }
+  }
+}
