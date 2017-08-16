@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains \QUI\Bricks\Controls\Pagination
+ * This file contains \QUI\Controls\Navigating\Pagination
  */
 
 namespace QUI\Controls\Navigating;
