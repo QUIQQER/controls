@@ -2,7 +2,7 @@
   "name": "quiqqer\/controls",
   "type": "quiqqer-plugin",
   "description": "QUIQQER default controls",
-  "version": "dev-master",
+  "version": "dev-dev",
   "license": "MIT",
   "authors": [
     {
