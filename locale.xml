@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<locales>
+    <groups name="quiqqer/controls" datatype="js,php">
+        <locale name="package.title">
+            <de><![CDATA[QUIQQER - Controls]]></de>
+            <en><![CDATA[QUIQQER - Controls]]></en>
+        </locale>
+        <locale name="package.description">
+            <de><![CDATA[Repository für alle standard Controls die QUIQQER mitliefert.Controls sind PHP Klassen welche in HTML und somit GUI Element erzeugen.]]></de>
+            <en><![CDATA[A Repository containing all standard controls for QUIQQER. Controls are PHP-Classes which create HTML and form GUI Elements.]]></en>
+        </locale>
+    </groups>
+</locales>

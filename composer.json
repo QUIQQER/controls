@@ -1,7 +1,7 @@
 {
   "name": "quiqqer\/controls",
   "type": "quiqqer-plugin",
-  "description": "QUIQQER default controls",
+  "description": "A Repository containing all standard controls for QUIQQER. Controls are PHP-Classes which create HTML and form GUI Elements",
   "version": "dev-dev",
   "license": "MIT",
   "authors": [
