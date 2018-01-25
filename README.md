@@ -1,26 +1,28 @@
-Produktverwaltung
+QUIQQER Controls
 ========
 
-Repository für alle standard Controls die QUIQQER mitliefert.
-Controls sind PHP Klassen welche in HTML und somit GUI Element erzeugen.
+Repository for all standard controls supplied with QUIQQER.
+Controls are PHP classes which create GUI elements for / in HTML.
 
-Paketname:
+Package name:
 
     quiqqer/controls
 
 
 
-Features (Funktionen)
+Features
 --------
 
-- QUI Hauptcontrol Klasse
+- Main control class (QUI\Control)
+
 
 Installation
 ------------
 
-Der Paketname ist: quiqqer/controls
+The package name is: quiqqer/controls
 
-Mitwirken
+
+Contribution
 ----------
 
 - Issue Tracker: https://dev.quiqqer.com/quiqqer/controls/issues
@@ -30,16 +32,13 @@ Mitwirken
 Support
 -------
 
-Falls Sie ein Fehler gefunden haben, oder Verbesserungen wünschen,
-dann können Sie gerne an support@pcsg.de eine E-Mail schreiben.
+If you have found errors, wishes or suggestions for improvement,
+you can contact us by email at support@pcsg.de.
 
+We will try to meet your needs or send them to the responsible developers
+of the project.
 
-Lizenz
+License
 -------
 
 MIT
-
-
-Entwickler
---------
-

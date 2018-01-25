@@ -70,19 +70,19 @@ class Control extends QDOM
                 continue;
             }
 
-            if (is_object($value)) {
+            if (is_object($value) || is_array($value)) {
                 continue;
             }
 
-            $key = Utils\Security\Orthos::clear($key);
-            $params .= ' ' . $key . '="' . htmlentities($value) . '"';
+            $key    = Utils\Security\Orthos::clear($key);
+            $params .= ' '.$key.'="'.htmlentities($value).'"';
         }
 
         // qui class
         $quiClass = '';
 
         if ($this->getAttribute('qui-class')) {
-            $quiClass = 'data-qui="' . $this->getAttribute('qui-class') . '" ';
+            $quiClass = 'data-qui="'.$this->getAttribute('qui-class').'" ';
         }
 
         $cssClasses = array();
@@ -94,7 +94,7 @@ class Control extends QDOM
         $cssClasses = array_merge(array_keys($this->cssClasses), $cssClasses);
 
         if (!empty($cssClasses)) {
-            $quiClass .= 'class="' . implode($cssClasses, ' ') . '" ';
+            $quiClass .= 'class="'.implode($cssClasses, ' ').'" ';
         }
 
 
@@ -123,11 +123,11 @@ class Control extends QDOM
             $property = htmlentities($property);
             $value    = htmlentities($value);
 
-            $styles[] = $property . ':' . $value;
+            $styles[] = $property.':'.$value;
         }
 
         if (!empty($styles)) {
-            $style = 'style="' . implode(';', $styles) . '" ';
+            $style = 'style="'.implode(';', $styles).'" ';
         }
 
         return "<{$nodeName} {$style}{$quiClass}{$params}>{$body}</{$nodeName}>";
@@ -138,6 +138,7 @@ class Control extends QDOM
      * Can be overwritten
      *
      * @return string
+     * @throws Exception
      */
     public function getBody()
     {
@@ -186,7 +187,7 @@ class Control extends QDOM
     public function setJavaScriptControlOption($name, $value)
     {
         $this->setAttribute(
-            'data-qui-options-' . $name,
+            'data-qui-options-'.$name,
             $value
         );
     }
@@ -227,7 +228,7 @@ class Control extends QDOM
         }
 
         if (is_numeric($val)) {
-            return (string)$val . 'px';
+            return (string)$val.'px';
         }
 
         if (strpos($val, 'calc(') !== false) {
@@ -267,11 +268,11 @@ class Control extends QDOM
         $unit = str_replace($no, '', $val);
 
         if (in_array($unit, $units)) {
-            return $no . $unit;
+            return $no.$unit;
         }
 
         if (!empty($no) && empty($unit)) {
-            return $no . 'px';
+            return $no.'px';
         }
 
         return '';
@@ -324,7 +325,7 @@ class Control extends QDOM
             'alt'      => true,
             'title'    => true,
             'href'     => true,
-            '_blank'   => true,
+            'target'   => true,
             'role'     => true
         );
 
@@ -335,6 +336,8 @@ class Control extends QDOM
      * Return the Project
      *
      * @return \QUI\Projects\Project
+     *
+     * @throws Exception
      */
     protected function getProject()
     {
@@ -355,6 +358,7 @@ class Control extends QDOM
 
     /**
      * @return Projects\Project
+     * @throws Exception
      *
      * @deprecated
      */
