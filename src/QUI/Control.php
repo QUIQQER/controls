@@ -138,6 +138,7 @@ class Control extends QDOM
      * Can be overwritten
      *
      * @return string
+     * @throws Exception
      */
     public function getBody()
     {
@@ -324,7 +325,7 @@ class Control extends QDOM
             'alt'      => true,
             'title'    => true,
             'href'     => true,
-            '_blank'   => true,
+            'target'   => true,
             'role'     => true
         );
 
@@ -335,6 +336,8 @@ class Control extends QDOM
      * Return the Project
      *
      * @return \QUI\Projects\Project
+     *
+     * @throws Exception
      */
     protected function getProject()
     {
@@ -355,6 +358,7 @@ class Control extends QDOM
 
     /**
      * @return Projects\Project
+     * @throws Exception
      *
      * @deprecated
      */
