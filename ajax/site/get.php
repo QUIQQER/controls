@@ -23,5 +23,5 @@ QUI::$Ajax->registerFunction(
         );
     },
     array('project', 'id'),
-    'Permission::checkAdminUser'
+    false
 );
