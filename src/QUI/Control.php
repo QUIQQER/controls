@@ -14,34 +14,72 @@ use QUI;
  *
  * @author www.pcsg.de (Henning Leutz)
  */
-class Control extends QDOM
+class Control extends QDOM implements QUI\Controls\ControlInterface
 {
     /**
      * list of css classes
      *
      * @var array
      */
-    protected $cssClasses = array();
+    protected $cssClasses = [];
 
     /**
      * @var array
      */
-    protected $styles = array();
+    protected $styles = [];
+
+    /**
+     * JavaScript QUI Require Module name
+     * @var string
+     */
+    protected $module = '';
+
+    /**
+     * @var QUI\Events\Event
+     */
+    protected $Events;
 
     /**
      * Constructor
      *
      * @param array $attributes
      */
-    public function __construct($attributes = array())
+    public function __construct($attributes = [])
     {
+        $this->Events = new QUI\Events\Event();
+
         if (!isset($attributes['showTitle'])
             && !isset($this->attributes['showTitle'])
         ) {
             $attributes['showTitle'] = true;
         }
 
+        if (isset($attributes['styles'])) {
+            $this->setStyles($attributes['styles']);
+            unset($attributes['styles']);
+        }
+
+        if (isset($attributes['class'])) {
+            $this->addCSSClass($attributes['class']);
+            unset($attributes['class']);
+        }
+
+        if (isset($attributes['events'])) {
+            $this->addEvents($attributes['events']);
+            unset($attributes['events']);
+        }
+
         $this->setAttributes($attributes);
+    }
+
+    /**
+     * Set the javascript qui module class
+     *
+     * @param string $module
+     */
+    protected function setModule($module)
+    {
+        $this->module = $module;
     }
 
     /**
@@ -51,6 +89,13 @@ class Control extends QDOM
      */
     public function create()
     {
+        try {
+            $this->Events->fireEvent('create', [$this]);
+        } catch (QUI\Exception $Exception) {
+            QUI\System\Log::writeDebugException($Exception);
+        }
+
+
         $body = '';
 
         try {
@@ -85,7 +130,7 @@ class Control extends QDOM
             $quiClass = 'data-qui="'.$this->getAttribute('qui-class').'" ';
         }
 
-        $cssClasses = array();
+        $cssClasses = [];
 
         if ($this->getAttribute('class')) {
             $cssClasses[] = $this->getAttribute('class');
@@ -98,7 +143,7 @@ class Control extends QDOM
         }
 
 
-        // nddes
+        // nodes
         $nodeName = 'div';
 
         if ($this->getAttribute('nodeName')) {
@@ -115,8 +160,8 @@ class Control extends QDOM
             $this->styles['width'] = $this->cssValueCheck($this->getAttribute('width'));
         }
 
-        // csscrush_inline
-        $styles = array();
+        // css_inline
+        $styles = [];
         $style  = '';
 
         foreach ($this->styles as $property => $value) {
@@ -129,6 +174,13 @@ class Control extends QDOM
         if (!empty($styles)) {
             $style = 'style="'.implode(';', $styles).'" ';
         }
+
+        try {
+            $this->Events->fireEvent('createEnd', [$this]);
+        } catch (QUI\Exception $Exception) {
+            QUI\System\Log::writeDebugException($Exception);
+        }
+
 
         return "<{$nodeName} {$style}{$quiClass}{$params}>{$body}</{$nodeName}>";
     }
@@ -143,6 +195,28 @@ class Control extends QDOM
     public function getBody()
     {
         return '';
+    }
+
+    /**
+     * Set the binded javascript control
+     *
+     * @param string $control
+     */
+    public function setJavaScriptControl($control)
+    {
+        $this->setAttribute('qui-class', $control);
+    }
+
+    /**
+     * @param string $name
+     * @param mixed $value
+     */
+    public function setJavaScriptControlOption($name, $value)
+    {
+        $this->setAttribute(
+            'data-qui-options-'.$name,
+            $value
+        );
     }
 
     /**
@@ -168,28 +242,6 @@ class Control extends QDOM
                 $this->cssClasses[$cssClass] = true;
             }
         }
-    }
-
-    /**
-     * Set the binded javascript control
-     *
-     * @param string $control
-     */
-    public function setJavaScriptControl($control)
-    {
-        $this->setAttribute('qui-class', $control);
-    }
-
-    /**
-     * @param string $name
-     * @param mixed $value
-     */
-    public function setJavaScriptControlOption($name, $value)
-    {
-        $this->setAttribute(
-            'data-qui-options-'.$name,
-            $value
-        );
     }
 
     /**
@@ -235,7 +287,7 @@ class Control extends QDOM
             return (string)$val;
         }
 
-        $units = array(
+        $units = [
             'px',
             'cm',
             'mm',
@@ -262,7 +314,7 @@ class Control extends QDOM
             'turns',
             'Hz',
             'kHz'
-        );
+        ];
 
         $no   = (int)$val;
         $unit = str_replace($no, '', $val);
@@ -320,14 +372,14 @@ class Control extends QDOM
      */
     protected function isAllowedAttribute($attribute)
     {
-        $list = array(
+        $list = [
             'disabled' => true,
             'alt'      => true,
             'title'    => true,
             'href'     => true,
             'target'   => true,
             'role'     => true
-        );
+        ];
 
         return isset($list[$attribute]);
     }
@@ -366,4 +418,59 @@ class Control extends QDOM
     {
         return $this->getProject();
     }
+
+
+    //region events
+
+    /**
+     * (non-PHPdoc)
+     *
+     * @see \QUI\Interfaces\Events::addEvent()
+     *
+     * @param string $event - The type of event (e.g. 'complete').
+     * @param callback $fn - The function to execute.
+     */
+    public function addEvent($event, $fn)
+    {
+        $this->Events->addEvent($event, $fn);
+    }
+
+    /**
+     * (non-PHPdoc)
+     *
+     * @see \QUI\Interfaces\Events::addEvents()
+     *
+     * @param array $events
+     */
+    public function addEvents(array $events)
+    {
+        $this->Events->addEvents($events);
+    }
+
+    /**
+     * (non-PHPdoc)
+     *
+     * @see \QUI\Interfaces\Events::removeEvent()
+     *
+     * @param string $event - The type of event (e.g. 'complete').
+     * @param callback|boolean $fn - (optional) The function to remove.
+     */
+    public function removeEvent($event, $fn = false)
+    {
+        $this->Events->removeEvent($event, $fn);
+    }
+
+    /**
+     * (non-PHPdoc)
+     *
+     * @see \QUI\Interfaces\Events::removeEvents()
+     *
+     * @param array $events - (optional) If not passed removes all events of all types.
+     */
+    public function removeEvents(array $events)
+    {
+        $this->Events->removeEvents($events);
+    }
+
+    //endregion
 }
