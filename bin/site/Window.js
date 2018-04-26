@@ -5,9 +5,10 @@ define('package/quiqqer/controls/bin/site/Window', [
 
     'qui/QUI',
     'qui/controls/windows/Popup',
-    'Ajax'
+    'Ajax',
+    'Locale'
 
-], function (QUI, QUIPopup, QUIAjax) {
+], function (QUI, QUIPopup, QUIAjax, QUILocale) {
     "use strict";
 
     return new Class({
@@ -36,6 +37,9 @@ define('package/quiqqer/controls/bin/site/Window', [
             if (this.getAttribute('showTitle')) {
                 this.setAttribute('title', '&nbsp;');
             }
+
+
+            this.setAttribute('closeButtonText', QUILocale.get('quiqqer/system', 'close'));
         },
 
         /**
