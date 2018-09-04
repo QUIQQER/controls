@@ -22,8 +22,8 @@
 .quiqqer-sheets-desktop a,
 .quiqqer-sheets-desktop span {
     border: 1px solid #D0D3D3;
-    border-top: 1px solid #D0D3D3;
     border-bottom: 1px solid #D0D3D3;
+    border-top: 1px solid #D0D3D3;
     float: left;
     line-height: 30px;
     margin: 0;
@@ -32,16 +32,17 @@
 }
 
 .quiqqer-sheets-desktop-disabled {
+    border-color: #DDDDDD;
     color: #AAAAAA;
     cursor: default;
-    border-color: #DDDDDD;
 }
 
+.quiqqer-sheets-desktop-limits a.active,
 .quiqqer-sheets-desktop-current {
-    color: #FFFFFF;
-    cursor: default;
     background: #666;
     border-color: #666;
+    color: #FFFFFF;
+    cursor: default;
 }
 
 .quiqqer-sheets-desktop a:hover {

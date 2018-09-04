@@ -21,23 +21,23 @@ class Pagination extends QUI\Control
      *
      * @var array
      */
-    protected $getParams = array();
+    protected $getParams = [];
 
     /**
      * URL Params
      *
      * @var array
      */
-    protected $urlParams = array();
+    protected $urlParams = [];
 
     /**
      * constructor
      *
      * @param array $attributes
      */
-    public function __construct($attributes = array())
+    public function __construct($attributes = [])
     {
-        $this->setAttributes(array(
+        $this->setAttributes([
             'showLimit' => false,
             'limits'    => '[10,20,50]',
             'limit'     => 10,
@@ -46,12 +46,12 @@ class Pagination extends QUI\Control
             'useAjax'   => false,
             'showmax'   => 10,
             'anchor'    => false
-        ));
+        ]);
 
         parent::__construct($attributes);
 
         $this->addCSSFile(
-            dirname(__FILE__).'/Pagination.css'
+            dirname(__FILE__) . '/Pagination.css'
         );
 
 
@@ -169,7 +169,9 @@ class Pagination extends QUI\Control
             return '';
         }
 
-        $Engine->assign(array(
+        $this->setAttribute('data-limit', (int)$limit);
+
+        $Engine->assign([
             'this'       => $this,
             'count'      => $count,
             'start'      => $start,
@@ -182,9 +184,9 @@ class Pagination extends QUI\Control
             'limits'     => $limits,
             'Site'       => $Site,
             'Project'    => $Project
-        ));
+        ]);
 
-        return $Engine->fetch(dirname(__FILE__).'/Pagination.html');
+        return $Engine->fetch(dirname(__FILE__) . '/Pagination.html');
     }
 
     /**
@@ -227,11 +229,11 @@ class Pagination extends QUI\Control
      */
     public function getSQLParams()
     {
-        $result = array();
+        $result = [];
 
         if ($this->getAttribute('limit')) {
             $result['limit'] = $this->getStart()
-                               .','.$this->getAttribute('limit');
+                . ',' . $this->getAttribute('limit');
         }
 
         if ($this->getAttribute('order')) {
