@@ -254,10 +254,6 @@ define('package/quiqqer/controls/bin/navigating/Pagination', [
                 Query.limit = parseInt(self.$Limit.get('data-limit'));
                 Query.page = parseInt(Sheet.get('data-page'));
 
-                console.log(Query.limit)
-                console.log(Sheet)
-                console.log(Query.page)
-
                 self.setAttribute('limit', Query.limit);
                 self.fireEvent('change', [self, Sheet, Query]);
                 self.fireEvent('changeLimit', [Query.limit]);

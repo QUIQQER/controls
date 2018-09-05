@@ -40,9 +40,11 @@ class Pagination extends QUI\Control
         $this->setAttributes([
             'showLimit' => false,
             'limits'    => '[10,20,50]',
-            'limit'     => 10,
+            'limit'     => 10, // {number} entries per page
             'order'     => false,
-            'sheet'     => 1,
+            'sheets'    => false, // {number} if false  pages count calculate on the fly
+            'count'     => null, // {number} require to calculate sheets on the fly
+            'sheet'     => 1, // {number} current (active) page
             'useAjax'   => false,
             'showmax'   => 10,
             'anchor'    => false
@@ -56,10 +58,9 @@ class Pagination extends QUI\Control
 
 
         if ($this->getAttribute('useAjax')) {
-            $this->setAttribute(
-                'data-qui',
-                'package/quiqqer/controls/bin/navigating/Pagination'
-            );
+            $this->setAttributes([
+                'data-qui'    => 'package/quiqqer/controls/bin/navigating/Pagination'
+            ]);
         } else {
             $this->setAttribute('data-qui', false);
         }
@@ -79,6 +80,7 @@ class Pagination extends QUI\Control
         $Project = $Site->getProject();
 
         $count = $this->getAttribute('sheets');
+
 
         if ($count === false) {
             if ($this->getAttribute('limit') &&
