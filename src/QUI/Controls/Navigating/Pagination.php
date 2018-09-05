@@ -21,45 +21,46 @@ class Pagination extends QUI\Control
      *
      * @var array
      */
-    protected $getParams = array();
+    protected $getParams = [];
 
     /**
      * URL Params
      *
      * @var array
      */
-    protected $urlParams = array();
+    protected $urlParams = [];
 
     /**
      * constructor
      *
      * @param array $attributes
      */
-    public function __construct($attributes = array())
+    public function __construct($attributes = [])
     {
-        $this->setAttributes(array(
+        $this->setAttributes([
             'showLimit' => false,
             'limits'    => '[10,20,50]',
-            'limit'     => 10,
+            'limit'     => 10, // {number} entries per page
             'order'     => false,
-            'sheet'     => 1,
+            'sheets'    => false, // {number} if false  pages count calculate on the fly
+            'count'     => null, // {number} require to calculate sheets on the fly
+            'sheet'     => 1, // {number} current (active) page
             'useAjax'   => false,
             'showmax'   => 10,
             'anchor'    => false
-        ));
+        ]);
 
         parent::__construct($attributes);
 
         $this->addCSSFile(
-            dirname(__FILE__).'/Pagination.css'
+            dirname(__FILE__) . '/Pagination.css'
         );
 
 
         if ($this->getAttribute('useAjax')) {
-            $this->setAttribute(
-                'data-qui',
-                'package/quiqqer/controls/bin/navigating/Pagination'
-            );
+            $this->setAttributes([
+                'data-qui'    => 'package/quiqqer/controls/bin/navigating/Pagination'
+            ]);
         } else {
             $this->setAttribute('data-qui', false);
         }
@@ -79,6 +80,7 @@ class Pagination extends QUI\Control
         $Project = $Site->getProject();
 
         $count = $this->getAttribute('sheets');
+
 
         if ($count === false) {
             if ($this->getAttribute('limit') &&
@@ -169,7 +171,9 @@ class Pagination extends QUI\Control
             return '';
         }
 
-        $Engine->assign(array(
+        $this->setAttribute('data-limit', (int)$limit);
+
+        $Engine->assign([
             'this'       => $this,
             'count'      => $count,
             'start'      => $start,
@@ -182,9 +186,9 @@ class Pagination extends QUI\Control
             'limits'     => $limits,
             'Site'       => $Site,
             'Project'    => $Project
-        ));
+        ]);
 
-        return $Engine->fetch(dirname(__FILE__).'/Pagination.html');
+        return $Engine->fetch(dirname(__FILE__) . '/Pagination.html');
     }
 
     /**
@@ -227,11 +231,11 @@ class Pagination extends QUI\Control
      */
     public function getSQLParams()
     {
-        $result = array();
+        $result = [];
 
         if ($this->getAttribute('limit')) {
             $result['limit'] = $this->getStart()
-                               .','.$this->getAttribute('limit');
+                . ',' . $this->getAttribute('limit');
         }
 
         if ($this->getAttribute('order')) {
