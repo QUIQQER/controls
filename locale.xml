@@ -6,8 +6,8 @@
             <en><![CDATA[QUIQQER - Controls]]></en>
         </locale>
         <locale name="package.description">
-            <de><![CDATA[Repository für alle standard Controls die QUIQQER mitliefert.Controls sind PHP Klassen welche in HTML und somit GUI Element erzeugen.]]></de>
-            <en><![CDATA[A Repository containing all standard controls for QUIQQER. Controls are PHP-Classes which create HTML and form GUI Elements.]]></en>
+            <de><![CDATA[Repository für alle Standard-Controls, die QUIQQER mitliefert. Controls sind PHP-Klassen, welche HTML und somit GUI-Elemente erzeugen.]]></de>
+            <en><![CDATA[A Repository containing all standard controls for QUIQQER. Controls are PHP-classes which create HTML and therefore form GUI-elements.]]></en>
         </locale>
     </groups>
 </locales>
