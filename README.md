@@ -2,7 +2,7 @@ QUIQQER Controls
 ========
 
 Repository for all standard controls supplied with QUIQQER.
-Controls are PHP classes which create GUI elements for / in HTML.
+Controls are PHP classes which output HTML and thereby create GUI elements.
 
 Package name:
 
@@ -22,7 +22,7 @@ Installation
 The package name is: quiqqer/controls
 
 
-Contribution
+Contribute
 ----------
 
 - Issue Tracker: https://dev.quiqqer.com/quiqqer/controls/issues
@@ -32,11 +32,11 @@ Contribution
 Support
 -------
 
-If you have found errors, wishes or suggestions for improvement,
-you can contact us by email at support@pcsg.de.
+If you found any flaws, have any wishes or suggestions you can send an email
+to support@pcsg.de to inform us about your concerns.  
 
-We will try to meet your needs or send them to the responsible developers
-of the project.
+We will try to respond to your request and forward it to the responsible developer.
+
 
 License
 -------
