@@ -41,7 +41,8 @@ We will try to respond to your request and forward it to the responsible develop
 License
 -------
 
-MIT
+- PCSG QL-1.0
+- GPL-3.0+
 
 
 Usage
