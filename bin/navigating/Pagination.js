@@ -190,7 +190,6 @@ define('package/quiqqer/controls/bin/navigating/Pagination', [
          * @param {Number} pages
          */
         setPageCount: function (pages) {
-            return;
             if (this.$sheets.length === parseInt(pages)) {
                 return;
             }
