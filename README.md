@@ -1,8 +1,8 @@
 QUIQQER Controls
 ========
 
-Repository for all standard controls supplied with QUIQQER.
-Controls are PHP classes which output HTML and thereby create GUI elements.
+This repository offers some standard controls for developers in addition to the bricks.  
+So developing is faster and you don't have to reinvent the wheel all the time.
 
 Package name:
 
