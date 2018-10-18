@@ -249,7 +249,7 @@ define('package/quiqqer/controls/bin/navigating/Pagination', [
                 self.$Limit = event.target;
                 self.$Limit.addClass('active');
 
-                Query.sheet = parseInt(self.$Limit.get('data-limit'));
+                Query.sheet = parseInt(Sheet.get('data-page'));
                 Query.limit = parseInt(self.$Limit.get('data-limit'));
                 Query.page = parseInt(Sheet.get('data-page'));
 
