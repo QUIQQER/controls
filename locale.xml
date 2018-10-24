@@ -6,8 +6,8 @@
             <en><![CDATA[QUIQQER - Controls]]></en>
         </locale>
         <locale name="package.description">
-            <de><![CDATA[Dieses Repository bietet einige Standard-Controls für Entwickler als Ergänzung zu den Bausteinen. Die Entwicklung wird damit schneller und das Rad muss nicht jedes mal neu erfunden werden.]]></de>
-            <en><![CDATA[This repository offers some standard controls for developers in addition to the bricks. So developing is faster and you don't have to reinvent the wheel all the time.]]></en>
+            <de><![CDATA[Dieses Repository bietet Entwicklern einige Standard-Controls als Ergänzung zu den Bausteinen. Das Entwickeln wird damit schneller und das Rad muss nicht jedes mal neu erfunden werden.]]></de>
+            <en><![CDATA[This repository offers developers some standard controls in addition to the bricks. So developing is faster and you don't have to reinvent the wheel all the time.]]></en>
         </locale>
     </groups>
 </locales>
