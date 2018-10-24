@@ -1,3 +1,5 @@
+![QUIQQER Controls](bin/images/Readme.jpg)
+
 QUIQQER Controls
 ========
 
