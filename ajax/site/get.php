@@ -12,16 +12,21 @@
  */
 QUI::$Ajax->registerFunction(
     'package_quiqqer_controls_ajax_site_get',
-    function ($project, $id) {
+    function ($project, $id, $siteUrl) {
         $Project = QUI::getProjectManager()->decode($project);
-        $Site    = $Project->get($id);
 
-        return array(
+        if (!empty($id)) {
+            $Site = $Project->get($id);
+        } else {
+            $Site = QUI\Projects\Site\Utils::getSiteByUrl($Project, $siteUrl);
+        }
+
+        return [
             'content' => QUI\Output::getInstance()->parse($Site->getAttribute('content')),
             'title'   => $Site->getAttribute('title'),
             'name'    => $Site->getAttribute('name')
-        );
+        ];
     },
-    array('project', 'id'),
+    ['project', 'id', 'siteUrl'],
     false
 );

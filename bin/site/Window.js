@@ -20,6 +20,7 @@ define('package/quiqqer/controls/bin/site/Window', [
             project  : false,
             lang     : false,
             id       : false,
+            siteUrl  : false,
             showTitle: true
         },
 
@@ -64,7 +65,8 @@ define('package/quiqqer/controls/bin/site/Window', [
                     name: this.getAttribute('project'),
                     lang: this.getAttribute('lang')
                 }),
-                id       : this.getAttribute('id')
+                id       : this.getAttribute('id'),
+                siteUrl  : this.getAttribute('siteUrl')
             });
         }
     });
