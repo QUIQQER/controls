@@ -21,12 +21,23 @@ class ControlUtils
      * @param Control $Control
      * @return string
      */
-    static public function parse(Control $Control)
+    public static function parse(Control $Control)
     {
         $result = '';
         $result .= $Control->create();
         $result .= QUI\Control\Manager::getCSS();
 
         return $result;
+    }
+
+    /**
+     * Filter CSS class name
+     *
+     * @param string $cssClass
+     * @return string|string[]|null
+     */
+    public static function clearClassName($cssClass)
+    {
+        return trim(preg_replace('#[^_a-zA-Z0-9-:/]#', ' ', $cssClass));
     }
 }

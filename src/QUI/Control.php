@@ -234,7 +234,20 @@ class Control extends QDOM implements QUI\Controls\ControlInterface
             return;
         }
 
-        $classes = preg_replace('/[^_a-zA-Z0-9-]/', ' ', $cssClass);
+        //check if is json
+        $json = json_decode($cssClass);
+
+        if (is_array($json)) {
+            foreach ($json as $cssClass) {
+                if (!isset($this->cssClasses[$cssClass])) {
+                    $this->cssClasses[$cssClass] = true;
+                }
+            }
+
+            return;
+        }
+
+        $classes = QUI\ControlUtils::clearClassName($cssClass);
         $classes = explode(' ', $classes);
 
         foreach ($classes as $cssClass) {
@@ -243,6 +256,7 @@ class Control extends QDOM implements QUI\Controls\ControlInterface
             }
         }
     }
+
 
     /**
      * Remove a css class from the CSS list
