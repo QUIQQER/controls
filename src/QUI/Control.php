@@ -235,7 +235,7 @@ class Control extends QDOM implements QUI\Controls\ControlInterface
         }
 
         //check if is json
-        $json = json_decode($cssClass);
+        $json = json_decode($cssClass, true);
 
         if (is_array($json)) {
             foreach ($json as $cssClass) {
