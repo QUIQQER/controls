@@ -38,6 +38,6 @@ class ControlUtils
      */
     public static function clearClassName($cssClass)
     {
-        return trim(preg_replace('#[^_a-zA-Z0-9-:/]#', ' ', $cssClass));
+        return \trim(\preg_replace('#[^_a-zA-Z0-9-:/]#', ' ', $cssClass));
     }
 }
