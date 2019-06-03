@@ -48,9 +48,7 @@ class Control extends QDOM implements QUI\Controls\ControlInterface
     {
         $this->Events = new QUI\Events\Event();
 
-        if (!isset($attributes['showTitle'])
-            && !isset($this->attributes['showTitle'])
-        ) {
+        if (!isset($attributes['showTitle']) && !isset($this->attributes['showTitle'])) {
             $attributes['showTitle'] = true;
         }
 
@@ -109,18 +107,18 @@ class Control extends QDOM implements QUI\Controls\ControlInterface
         $params     = '';
 
         foreach ($attributes as $key => $value) {
-            if (strpos($key, 'data-') === false
+            if (\strpos($key, 'data-') === false
                 && $this->isAllowedAttribute($key) === false
             ) {
                 continue;
             }
 
-            if (is_object($value) || is_array($value)) {
+            if (\is_object($value) || \is_array($value)) {
                 continue;
             }
 
             $key    = Utils\Security\Orthos::clear($key);
-            $params .= ' '.$key.'="'.htmlentities($value).'"';
+            $params .= ' '.$key.'="'.\htmlentities($value).'"';
         }
 
         // qui class
@@ -136,10 +134,10 @@ class Control extends QDOM implements QUI\Controls\ControlInterface
             $cssClasses[] = $this->getAttribute('class');
         }
 
-        $cssClasses = array_merge(array_keys($this->cssClasses), $cssClasses);
+        $cssClasses = \array_merge(\array_keys($this->cssClasses), $cssClasses);
 
         if (!empty($cssClasses)) {
-            $quiClass .= 'class="'.implode($cssClasses, ' ').'" ';
+            $quiClass .= 'class="'.\implode($cssClasses, ' ').'" ';
         }
 
 
@@ -165,14 +163,14 @@ class Control extends QDOM implements QUI\Controls\ControlInterface
         $style  = '';
 
         foreach ($this->styles as $property => $value) {
-            $property = htmlentities($property);
-            $value    = htmlentities($value);
+            $property = \htmlentities($property);
+            $value    = \htmlentities($value);
 
             $styles[] = $property.':'.$value;
         }
 
         if (!empty($styles)) {
-            $style = 'style="'.implode(';', $styles).'" ';
+            $style = 'style="'.\implode(';', $styles).'" ';
         }
 
         try {
@@ -226,7 +224,7 @@ class Control extends QDOM implements QUI\Controls\ControlInterface
      */
     public function addCSSClass($cssClass)
     {
-        if (!is_string($cssClass)) {
+        if (!\is_string($cssClass)) {
             return;
         }
 
@@ -235,9 +233,9 @@ class Control extends QDOM implements QUI\Controls\ControlInterface
         }
 
         //check if is json
-        $json = json_decode($cssClass, true);
+        $json = \json_decode($cssClass, true);
 
-        if (is_array($json)) {
+        if (\is_array($json)) {
             foreach ($json as $cssClass) {
                 if (!isset($this->cssClasses[$cssClass])) {
                     $this->cssClasses[$cssClass] = true;
@@ -248,7 +246,7 @@ class Control extends QDOM implements QUI\Controls\ControlInterface
         }
 
         $classes = QUI\ControlUtils::clearClassName($cssClass);
-        $classes = explode(' ', $classes);
+        $classes = \explode(' ', $classes);
 
         foreach ($classes as $cssClass) {
             if (!isset($this->cssClasses[$cssClass])) {
@@ -287,17 +285,17 @@ class Control extends QDOM implements QUI\Controls\ControlInterface
      */
     protected function cssValueCheck($val)
     {
-        $val = trim($val);
+        $val = \trim($val);
 
         if (empty($val)) {
             return '';
         }
 
-        if (is_numeric($val)) {
+        if (\is_numeric($val)) {
             return (string)$val.'px';
         }
 
-        if (strpos($val, 'calc(') !== false) {
+        if (\strpos($val, 'calc(') !== false) {
             return (string)$val;
         }
 
@@ -331,9 +329,9 @@ class Control extends QDOM implements QUI\Controls\ControlInterface
         ];
 
         $no   = (int)$val;
-        $unit = str_replace($no, '', $val);
+        $unit = \str_replace($no, '', $val);
 
-        if (in_array($unit, $units)) {
+        if (\in_array($unit, $units)) {
             return $no.$unit;
         }
 
@@ -439,10 +437,10 @@ class Control extends QDOM implements QUI\Controls\ControlInterface
     /**
      * (non-PHPdoc)
      *
-     * @see \QUI\Interfaces\Events::addEvent()
-     *
      * @param string $event - The type of event (e.g. 'complete').
      * @param callback $fn - The function to execute.
+     * @see \QUI\Interfaces\Events::addEvent()
+     *
      */
     public function addEvent($event, $fn)
     {
@@ -452,9 +450,9 @@ class Control extends QDOM implements QUI\Controls\ControlInterface
     /**
      * (non-PHPdoc)
      *
+     * @param array $events
      * @see \QUI\Interfaces\Events::addEvents()
      *
-     * @param array $events
      */
     public function addEvents(array $events)
     {
@@ -464,10 +462,10 @@ class Control extends QDOM implements QUI\Controls\ControlInterface
     /**
      * (non-PHPdoc)
      *
-     * @see \QUI\Interfaces\Events::removeEvent()
-     *
      * @param string $event - The type of event (e.g. 'complete').
      * @param callback|boolean $fn - (optional) The function to remove.
+     * @see \QUI\Interfaces\Events::removeEvent()
+     *
      */
     public function removeEvent($event, $fn = false)
     {
@@ -477,9 +475,9 @@ class Control extends QDOM implements QUI\Controls\ControlInterface
     /**
      * (non-PHPdoc)
      *
+     * @param array $events - (optional) If not passed removes all events of all types.
      * @see \QUI\Interfaces\Events::removeEvents()
      *
-     * @param array $events - (optional) If not passed removes all events of all types.
      */
     public function removeEvents(array $events)
     {
