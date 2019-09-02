@@ -41,14 +41,14 @@ define('package/quiqqer/controls/bin/navigating/Pagination', [
             this.parent(options);
 
             this.$Current = null;
-            this.$Limit = null;
-            this.$Select = null;
+            this.$Limit   = null;
+            this.$Select  = null;
 
-            this.$Prev = null;
-            this.$Next = null;
-            this.$First = null;
-            this.$Last = null;
-            this.$sheets = [];
+            this.$Prev    = null;
+            this.$Next    = null;
+            this.$First   = null;
+            this.$Last    = null;
+            this.$sheets  = [];
             this.$showMax = 10;
 
             this.$MorePrev = null;
@@ -72,13 +72,14 @@ define('package/quiqqer/controls/bin/navigating/Pagination', [
             var i;
 
             this.setAttribute('limit', parseInt(this.$Elm.get('data-limit')));
+            this.setAttribute('data-quiid', this.getId());
 
             this.$Container = this.$Elm.getElement('.quiqqer-sheets-desktop');
-            this.$First = this.$Elm.getElement('.quiqqer-sheets-first');
-            this.$Prev = this.$Elm.getElement('.quiqqer-sheets-prev');
-            this.$Last = this.$Elm.getElement('.quiqqer-sheets-last');
-            this.$Next = this.$Elm.getElement('.quiqqer-sheets-next');
-            this.$Select = this.$Elm.getElement('.quiqqer-sheets-mobile select');
+            this.$First     = this.$Elm.getElement('.quiqqer-sheets-first');
+            this.$Prev      = this.$Elm.getElement('.quiqqer-sheets-prev');
+            this.$Last      = this.$Elm.getElement('.quiqqer-sheets-last');
+            this.$Next      = this.$Elm.getElement('.quiqqer-sheets-next');
+            this.$Select    = this.$Elm.getElement('.quiqqer-sheets-mobile select');
 
             this.$Current = this.$Elm.getElement(
                 '.quiqqer-sheets-desktop-current'
@@ -251,7 +252,7 @@ define('package/quiqqer/controls/bin/navigating/Pagination', [
 
                 Query.sheet = parseInt(Sheet.get('data-page'));
                 Query.limit = parseInt(self.$Limit.get('data-limit'));
-                Query.page = parseInt(Sheet.get('data-page'));
+                Query.page  = parseInt(Sheet.get('data-page'));
 
                 self.setAttribute('limit', Query.limit);
                 self.fireEvent('change', [self, Sheet, Query]);
@@ -268,7 +269,7 @@ define('package/quiqqer/controls/bin/navigating/Pagination', [
                     Query  = QUIStringUtils.getUrlParams(this.value);
 
                 Query.sheet = self.getAttribute('limit');
-                Query.page = parseInt(Target.options[event.target.selectedIndex].get('data-page'));
+                Query.page  = parseInt(Target.options[event.target.selectedIndex].get('data-page'));
                 Query.limit = self.getAttribute('limit');
 
 //                if (self.$Limit) {
@@ -319,7 +320,6 @@ define('package/quiqqer/controls/bin/navigating/Pagination', [
          * @fire change [this, Sheet, query]
          */
         openPage: function (no) {
-
             if (typeof this.$sheets[no] === 'undefined') {
                 return;
             }
@@ -332,11 +332,11 @@ define('package/quiqqer/controls/bin/navigating/Pagination', [
             }
 
             Query.sheet = parseInt(Sheet.get('data-page'));
-            Query.page = parseInt(Sheet.get('data-page'));
+            Query.page  = parseInt(Sheet.get('data-page'));
             Query.limit = this.getAttribute('limit');
 
-            if (self.$Limit) {
-                Query.limit = parseInt(self.$Limit.get('data-limit'));
+            if (this.$Limit) {
+                Query.limit = parseInt(this.$Limit.get('data-limit'));
             }
 
             this.setPage(no);
@@ -468,7 +468,7 @@ define('package/quiqqer/controls/bin/navigating/Pagination', [
 
             if (start <= 0) {
                 start = -1;
-                end = this.$showMax;
+                end   = this.$showMax;
             }
 
             if (end >= len) {
