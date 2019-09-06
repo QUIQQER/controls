@@ -81,8 +81,14 @@ class Pagination extends QUI\Control
             return '';
         }
 
+        $Project = false;
         $Site    = $this->getAttribute('Site');
-        $Project = $Site->getProject();
+
+        if (empty($Site)) {
+            $Site = false;
+        } else {
+            $Project = $Site->getProject();
+        }
 
         $count = $this->getAttribute('sheets');
 
