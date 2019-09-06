@@ -6,7 +6,7 @@
 
             {$getParams['limit'] = $limit}
             {$getParams['sheet'] = $num}
-            <option data-page="{$num}" value="{$Site->getUrl($pathParams, $getParams)}{$anchor}"
+            <option data-page="{$num}" value="{if $Site}{$Site->getUrl($pathParams, $getParams)}{/if}{$anchor}"
             {if $num == $active}
                 selected="selected"
             {/if}
@@ -31,7 +31,7 @@
     {else}
         {$getParams['limit'] = $limit}
         {$getParams['sheet'] = false}
-        <a href="{$Site->getUrl($pathParams, $getParams)}{$anchor}"
+        <a href="{if $Site}{$Site->getUrl($pathParams, $getParams)}{/if}{$anchor}"
             class="fa fa-angle-double-left quiqqer-sheets-first"
             title="{t}quiqqer/bricks controls.pagination.first.page{/t}">
         </a>
@@ -47,13 +47,13 @@
         {math assign=backward equation="x - y" x=$active y=1}
         {if $backward == 1}
             {$getParams['limit'] = $limit}
-            <a href="{$Site->getUrl($pathParams, $getParams)}{$anchor}"
+            <a href="{if $Site}{$Site->getUrl($pathParams, $getParams)}{/if}{$anchor}"
                 class="fa fa-angle-left quiqqer-sheets-prev"
                 title="{t}quiqqer/bricks controls.pagination.back{/t}">
             </a>
         {else}
             {$getParams['sheet'] = $backward}
-            <a href="{$Site->getUrl($pathParams, $getParams)}{$anchor}"
+            <a href="{if $Site}{$Site->getUrl($pathParams, $getParams)}{/if}{$anchor}"
                 class="fa fa-angle-left quiqqer-sheets-prev"
                 title="{t}quiqqer/bricks controls.pagination.back{/t}">
             </a>
@@ -72,7 +72,7 @@
             <span class="quiqqer-sheets-desktop-current">{$num}</span>
             {else}
             {$getParams['limit'] = $limit}
-            <a href="{$Site->getUrl($pathParams, $getParams)}{$anchor}"
+            <a href="{if $Site}{$Site->getUrl($pathParams, $getParams)}{/if}{$anchor}"
                class="quiqqer-sheets-sheet quiqqer-sheets-desktop-current"
                data-page="{$num}"
                     >
@@ -83,7 +83,7 @@
             {$getParams['limit'] = $limit}
             {if $num == 1}
                 {$getParams['sheet'] = false}
-                <a href="{$Site->getUrl($pathParams, $getParams)}{$anchor}"
+                <a href="{if $Site}{$Site->getUrl($pathParams, $getParams)}{/if}{$anchor}"
                    class="quiqqer-sheets-sheet"
                    data-page="{$num}"
                 >
@@ -91,7 +91,7 @@
                 </a>
             {else}
                 {$getParams['sheet'] = $num}
-                <a href="{$Site->getUrl($pathParams, $getParams)}{$anchor}"
+                <a href="{if $Site}{$Site->getUrl($pathParams, $getParams)}{/if}{$anchor}"
                    class="quiqqer-sheets-sheet"
                    data-page="{$num}"
                 >
@@ -114,7 +114,7 @@
     {else}
         {math assign=forward equation="x + y" x=$active y=1 }
         {$getParams['sheet'] = $forward}
-        <a href="{$Site->getUrl($pathParams, $getParams)}{$anchor}"
+        <a href="{if $Site}{$Site->getUrl($pathParams, $getParams)}{/if}{$anchor}"
            class="fa fa-angle-right quiqqer-sheets-next"
            title="{t}quiqqer/bricks controls.pagination.next{/t}"
         >
@@ -127,7 +127,7 @@
         ></span>
     {else}
         {$getParams['sheet'] = $count}
-        <a href="{$Site->getUrl($pathParams, $getParams)}{$anchor}"
+        <a href="{if $Site}{$Site->getUrl($pathParams, $getParams)}{/if}{$anchor}"
            title="{t}quiqqer/bricks controls.pagination.last.page{/t}"
            class="fa fa-angle-double-right quiqqer-sheets-last"
         ></a>
@@ -139,7 +139,7 @@
     {foreach from=$limits item=limitEntry name=limits}
     {$getParams['limit'] = $limitEntry}
     {$getParams['sheet'] = false}
-    <a href="{$Site->getUrl($pathParams, $getParams)}" data-limit="{$limitEntry}">
+    <a href="{if $Site}{$Site->getUrl($pathParams, $getParams)}{/if}" data-limit="{$limitEntry}">
         {$limitEntry}
     </a>
     {if not $smarty.foreach.limits.last} | {/if}
