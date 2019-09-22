@@ -41,6 +41,8 @@ class MetaList
     }
 
     /**
+     * Create the meta block
+     *
      * @return string
      */
     public function create()
