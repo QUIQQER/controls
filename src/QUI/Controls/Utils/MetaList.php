@@ -22,7 +22,7 @@ class MetaList
 
     /**
      * @param $itemprop
-     * @param array $attributes
+     * @param array|object $attributes
      */
     public function add($itemprop, $attributes = [])
     {
@@ -54,6 +54,14 @@ class MetaList
             $attributes = $item['attributes'];
             $node       = 'meta';
             $html       = '';
+
+            if (\is_object($attributes)) {
+                if (\method_exists($attributes, 'create')) {
+                    $result .= $attributes->create();
+                }
+
+                continue;
+            }
 
             if (isset($attributes['nodeName'])) {
                 $node = $attributes['nodeName'];
