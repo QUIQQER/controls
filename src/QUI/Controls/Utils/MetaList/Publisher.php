@@ -36,15 +36,15 @@ class Publisher extends QUI\QDOM
 
         $publisherType = $Project->getConfig('publisher_type');
 
-        $itemScope = 'publisher';
-        $itemType  = 'https://schema.org/Organization';
+        $itemProp = 'publisher';
+        $itemType = 'https://schema.org/Organization';
 
         if ($publisherType === 'person') {
             $itemType = 'https://schema.org/Person';
         }
 
         $this->setAttribute('itemtype', $itemType);
-        $this->setAttribute('itemscope', $itemScope);
+        $this->setAttribute('itemprop', $itemProp);
         $this->setAttribute('publisher', $publisher);
         $this->setAttribute('logo', $Project->getConfig('publisher_image'));
         $this->setAttribute('url', $Project->getConfig('publisher_url'));
@@ -58,7 +58,7 @@ class Publisher extends QUI\QDOM
         $publisher = \htmlspecialchars($this->getAttribute('publisher'));
         $logo      = $this->getAttribute('logo');
         $url       = \htmlspecialchars($this->getAttribute('url'));
-        $itemScope = \htmlspecialchars($this->getAttribute('itemscope'));
+        $itemProp  = \htmlspecialchars($this->getAttribute('itemprop'));
         $itemType  = 'https://schema.org/Organization';
 
         if ($this->getAttribute('itemtype') === 'person') {
@@ -78,7 +78,7 @@ class Publisher extends QUI\QDOM
             }
         }
 
-        $result = '<div itemscope="'.$itemScope.'" itemtype="'.$itemType.'">';
+        $result = '<div itemscope itemprop="'.$itemProp.'" itemtype="'.$itemType.'">';
         $result .= '<meta itemprop="name" content="'.$publisher.'">';
         $result .= '<meta itemprop="logo" content="'.$logo.'">';
         $result .= '<meta itemprop="url" content="'.$url.'">';
