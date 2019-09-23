@@ -52,11 +52,29 @@ class MetaList
         foreach ($this->items as $item) {
             $itemprop   = $item['itemprop'];
             $attributes = $item['attributes'];
+            $node       = 'meta';
+            $html       = '';
+
+            if (isset($attributes['nodeName'])) {
+                $node = $attributes['nodeName'];
+                unset($attributes['nodeName']);
+            }
+
+            if (isset($attributes['html'])) {
+                $html = $attributes['html'];
+                unset($attributes['html']);
+            }
+
 
             if (\is_array($attributes)) {
                 $a = '';
 
                 foreach ($attributes as $attr => $v) {
+                    if (empty($v)) {
+                        $a .= $attr.' ';
+                        continue;
+                    }
+
                     $a .= $attr.'="'.$v.'" ';
                 }
 
@@ -67,7 +85,18 @@ class MetaList
                 $attributes = '';
             }
 
-            $result .= '<meta itemprop="'.$itemprop.'" '.$attributes.'>';
+            if (empty($html)) {
+                $result .= '<'.$node.' itemprop="'.$itemprop.'" '.$attributes.' />';
+                continue;
+            }
+
+            $result .= '<'.$node.' itemprop="'.$itemprop.'" '.$attributes.'>';
+
+            if (!empty($html)) {
+                $result .= $html;
+            }
+
+            $result .= '</'.$node.'>';
         }
 
         return $result;
