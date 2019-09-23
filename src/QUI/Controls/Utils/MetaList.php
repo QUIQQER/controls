@@ -70,6 +70,11 @@ class MetaList
                 $a = '';
 
                 foreach ($attributes as $attr => $v) {
+                    if (empty($v)) {
+                        $a .= $attr.' ';
+                        continue;
+                    }
+
                     $a .= $attr.'="'.$v.'" ';
                 }
 
