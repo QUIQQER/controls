@@ -80,7 +80,9 @@ class Publisher extends QUI\QDOM
 
         $result = '<div itemscope itemprop="'.$itemProp.'" itemtype="'.$itemType.'">';
         $result .= '<meta itemprop="name" content="'.$publisher.'">';
-        $result .= '<meta itemprop="logo" content="'.$logo.'">';
+        $result .= '<div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">';
+        $result .= '    <meta itemprop="url" content="'.$logo.'"/>';
+        $result .= '</div>';
         $result .= '<meta itemprop="url" content="'.$url.'">';
         $result .= '</div>';
 
