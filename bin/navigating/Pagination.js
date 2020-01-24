@@ -371,6 +371,8 @@ define('package/quiqqer/controls/bin/navigating/Pagination', [
             this.$Last.removeClass('quiqqer-sheets-desktop-disabled');
             this.$Next.removeClass('quiqqer-sheets-desktop-disabled');
 
+            this.$Select.selectedIndex = no;
+
             // repaint if next sheet is in the hidden last
             this.$redraw();
         },
