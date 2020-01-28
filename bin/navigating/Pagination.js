@@ -15,9 +15,12 @@ define('package/quiqqer/controls/bin/navigating/Pagination', [
     'qui/QUI',
     'qui/controls/Control',
     'qui/utils/String',
+
+    'URI',
+
     'Locale'
 
-], function (QUI, QUIControl, QUIStringUtils, QUILocale) {
+], function (QUI, QUIControl, QUIStringUtils, URI, QUILocale) {
     "use strict";
 
     return new Class({
@@ -33,8 +36,9 @@ define('package/quiqqer/controls/bin/navigating/Pagination', [
         ],
 
         options: {
-            limit: 10,
-            page : 1
+            limit    : 10,
+            page     : 1,
+            changeurl: false    // change url GET params on page change
         },
 
         initialize: function (options) {
@@ -341,10 +345,25 @@ define('package/quiqqer/controls/bin/navigating/Pagination', [
 
             this.setPage(no);
             this.fireEvent('change', [this, Sheet, Query]);
+
+            if (!this.getAttribute('changeurl')) {
+                var uri = new URI();
+
+                uri.search({
+                    limit: Query.limit,
+                    page : Query.page
+                });
+
+                var newUrl = uri.search();
+
+                if (window.history.pushState) {
+                    window.history.pushState({href: newUrl}, "", newUrl);
+                }
+            }
         },
 
         /**
-         * Open page number and does not trigger the change event
+         * Open page number and does not trigger the change event and/or URL
          *
          * @param {Number} no - page number
          */
