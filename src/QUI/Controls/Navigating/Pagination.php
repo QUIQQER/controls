@@ -38,22 +38,24 @@ class Pagination extends QUI\Control
     public function __construct($attributes = [])
     {
         $this->setAttributes([
-            'showLimit' => false,
-            'limits'    => '[10,20,50]',
-            'limit'     => 10, // {number} entries per page
-            'order'     => false,
-            'sheets'    => false, // {number} if false  pages count calculate on the fly
-            'count'     => null, // {number} require to calculate sheets on the fly
-            'sheet'     => 1, // {number} current (active) page
-            'useAjax'   => false,
-            'showmax'   => 10,
-            'anchor'    => false
+            'showLimit'   => false,
+            'limits'      => '[10,20,50]',
+            'limit'       => 10, // {number} entries per page
+            'order'       => false,
+            'sheets'      => false, // {number} if false  pages count calculate on the fly
+            'count'       => null, // {number} require to calculate sheets on the fly
+            'sheet'       => 1, // {number} current (active) page
+            'useAjax'     => false,
+            'showmax'     => 10,
+            'anchor'      => false,
+            'opacity'     => 0,
+            'useAjaxText' => false
         ]);
 
         parent::__construct($attributes);
 
         $this->addCSSFile(
-            \dirname(__FILE__).'/Pagination.css'
+            \dirname(__FILE__) . '/Pagination.css'
         );
 
 
@@ -169,6 +171,9 @@ class Pagination extends QUI\Control
         $order = $this->getAttribute('order');
         $sheet = $this->getAttribute('sheet');
 
+        $opacity     = $this->getAttribute('opacity');
+        $useAjaxText = $this->getAttribute('useAjaxText');
+
         $this->getParams['sheet'] = $sheet;
         $this->getParams['limit'] = $limit;
 
@@ -185,21 +190,23 @@ class Pagination extends QUI\Control
         $this->setAttribute('data-limit', (int)$limit);
 
         $Engine->assign([
-            'this'       => $this,
-            'count'      => $count,
-            'start'      => $start,
-            'end'        => $end,
-            'active'     => $active,
-            'pathParams' => $this->urlParams,
-            'getParams'  => $this->getParams,
-            'anchor'     => $anchor,
-            'limit'      => $limit,
-            'limits'     => $limits,
-            'Site'       => $Site,
-            'Project'    => $Project
+            'this'        => $this,
+            'count'       => $count,
+            'start'       => $start,
+            'end'         => $end,
+            'active'      => $active,
+            'pathParams'  => $this->urlParams,
+            'getParams'   => $this->getParams,
+            'anchor'      => $anchor,
+            'limit'       => $limit,
+            'limits'      => $limits,
+            'Site'        => $Site,
+            'Project'     => $Project,
+            'opacity'     => $opacity,
+            'useAjaxText' => $useAjaxText
         ]);
 
-        return $Engine->fetch(\dirname(__FILE__).'/Pagination.html');
+        return $Engine->fetch(\dirname(__FILE__) . '/Pagination.html');
     }
 
     /**
@@ -246,7 +253,7 @@ class Pagination extends QUI\Control
 
         if ($this->getAttribute('limit')) {
             $result['limit'] = $this->getStart()
-                               .','.$this->getAttribute('limit');
+                . ',' . $this->getAttribute('limit');
         }
 
         if ($this->getAttribute('order')) {

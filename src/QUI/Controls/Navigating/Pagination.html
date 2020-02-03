@@ -11,17 +11,18 @@
                 selected="selected"
             {/if}
             >{locale group="quiqqer/bricks"
-                value="controls.pagination.mobile.option"
-                from=$num
-                max=$count
+               value="controls.pagination.mobile.option"
+               from=$num
+               max=$count
             }</option>
         {/section}
     </select>
 </div>
 
-<div class="quiqqer-sheets-desktop hide-on-mobile{if !$this->getAttribute('showLimit')} quiqqer-sheets-desktop__100{/if}"
-        {if $this->getAttribute('useAjax')}style="opacity:0"{/if}
+<div class="quiqqer-sheets-desktop hide-on-mobile show-on-noscript{if !$this->getAttribute('showLimit')} quiqqer-sheets-desktop__100{/if}"
+        {if $this->getAttribute('useAjax')}style="opacity:{$opacity}"{/if}
 >
+
     {if (!isset($smarty.request.sheet) || $active == 1)
         && $this->getAttribute('useAjax') === false
     }
@@ -133,6 +134,12 @@
         ></a>
     {/if}
 </div>
+
+{if $useAjaxText}
+    <noscript>
+        {locale group="quiqqer/controls" value="package.nojavascript"}
+    </noscript>
+{/if}
 
 {if $this->getAttribute('showLimit') && $limits}
 <div class="quiqqer-sheets-desktop-limits">
