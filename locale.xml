@@ -9,5 +9,9 @@
             <de><![CDATA[Dieses Repository bietet Entwicklern einige Standard-Controls als Ergänzung zu den Bausteinen. Das Entwickeln wird damit schneller und das Rad muss nicht jedes mal neu erfunden werden.]]></de>
             <en><![CDATA[This repository offers developers some standard controls in addition to the bricks. So developing is faster and you don't have to reinvent the wheel all the time.]]></en>
         </locale>
+        <locale name="package.nojavascript">
+            <de><![CDATA[Um diese Seite nutzen zu können, müssen Sie in Ihren Browser-Einstellungen Javascript aktivieren.]]></de>
+            <en><![CDATA[To use this page, you must activate Javascript in your browser settings.]]></en>
+        </locale>
     </groups>
 </locales>
