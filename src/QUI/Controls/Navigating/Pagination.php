@@ -220,7 +220,9 @@ class Pagination extends QUI\Control
         }
 
         if (isset($_GET['sheet'])) {
-            $sheet = $_GET['sheet'];
+            $sheet = (int)$_GET['sheet'];
+        } elseif (isset($_GET['page'])) {
+            $sheet = (int)$_GET['page'];
         }
 
         $this->setAttribute('limit', $limit);
