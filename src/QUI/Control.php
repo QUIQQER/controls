@@ -137,7 +137,7 @@ class Control extends QDOM implements QUI\Controls\ControlInterface
         $cssClasses = \array_merge(\array_keys($this->cssClasses), $cssClasses);
 
         if (!empty($cssClasses)) {
-            $quiClass .= 'class="'.\implode($cssClasses, ' ').'" ';
+            $quiClass .= 'class="'.\implode(' ', $cssClasses).'" ';
         }
 
 
