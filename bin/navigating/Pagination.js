@@ -162,10 +162,15 @@ define('package/quiqqer/controls/bin/navigating/Pagination', [
                 CurrentLimit.addClass('active');
             }
 
-
             this.$sheets = this.$Elm.getElements('.quiqqer-sheets-sheet');
 
             var lastSize = LastSheet.getSize().x;
+
+            if (!lastSize) {
+                lastSize = LastSheet.measure(function () {
+                    return this.getSize().x;
+                });
+            }
 
             this.$sheets.each(function (Sheet) {
                 Sheet.setStyle('width', lastSize);
