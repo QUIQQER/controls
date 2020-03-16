@@ -26,6 +26,11 @@ class Control extends QDOM implements QUI\Controls\ControlInterface
     /**
      * @var array
      */
+    protected $cssFiles = [];
+
+    /**
+     * @var array
+     */
     protected $styles = [];
 
     /**
@@ -275,7 +280,19 @@ class Control extends QDOM implements QUI\Controls\ControlInterface
      */
     public function addCSSFile($file)
     {
+        $this->cssFiles[] = $file;
+
         Control\Manager::addCSSFile($file);
+    }
+
+    /**
+     * Return the added css files
+     *
+     * @return array
+     */
+    public function getCSSFiles()
+    {
+        return $this->cssFiles;
     }
 
     /**
