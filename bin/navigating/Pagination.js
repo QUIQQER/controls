@@ -38,7 +38,7 @@ define('package/quiqqer/controls/bin/navigating/Pagination', [
         options: {
             limit    : 10,
             page     : 1,
-            changeurl: false    // change url GET params on page change
+            changeurl: true    // change url GET params on page change
         },
 
         initialize: function (options) {
@@ -351,13 +351,15 @@ define('package/quiqqer/controls/bin/navigating/Pagination', [
             this.setPage(no);
             this.fireEvent('change', [this, Sheet, Query]);
 
-            if (!this.getAttribute('changeurl')) {
+            if (this.getAttribute('changeurl')) {
                 var uri = new URI();
 
-                uri.search({
-                    limit: Query.limit,
-                    page : Query.page
-                });
+                var CurrentQuery = uri.search(true);
+
+                CurrentQuery.limit = Query.limit;
+                CurrentQuery.page  = Query.page;
+
+                uri.search(CurrentQuery);
 
                 var newUrl = uri.search();
 
