@@ -286,6 +286,20 @@ class Control extends QDOM implements QUI\Controls\ControlInterface
     }
 
     /**
+     * Add css files to the control
+     *
+     * @param array $files
+     */
+    public function addCSSFiles($files)
+    {
+        foreach ($files as $file) {
+            $this->cssFiles[] = $file;
+
+            Control\Manager::addCSSFile($file);
+        }
+    }
+
+    /**
      * Return the added css files
      *
      * @return array
