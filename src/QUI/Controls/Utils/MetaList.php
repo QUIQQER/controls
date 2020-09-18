@@ -10,8 +10,6 @@ namespace QUI\Controls\Utils;
  * Class MetaList
  * - build meta data for controls
  * - <meta itemprop="" content="">
- *
- * @package QUI\Controls\Utils
  */
 class MetaList
 {

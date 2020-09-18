@@ -8,8 +8,6 @@ use QUI\Projects\Project;
 
 /**
  * Class Publisher
- *
- * @package QUI\Controls\Utils\MetaList
  */
 class Publisher extends QUI\QDOM
 {
