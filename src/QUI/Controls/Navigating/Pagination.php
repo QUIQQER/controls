@@ -55,7 +55,7 @@ class Pagination extends QUI\Control
         parent::__construct($attributes);
 
         $this->addCSSFile(
-            \dirname(__FILE__) . '/Pagination.css'
+            \dirname(__FILE__).'/Pagination.css'
         );
 
 
@@ -206,7 +206,7 @@ class Pagination extends QUI\Control
             'useAjaxText' => $useAjaxText
         ]);
 
-        return $Engine->fetch(\dirname(__FILE__) . '/Pagination.html');
+        return $Engine->fetch(\dirname(__FILE__).'/Pagination.html');
     }
 
     /**
@@ -255,7 +255,7 @@ class Pagination extends QUI\Control
 
         if ($this->getAttribute('limit')) {
             $result['limit'] = $this->getStart()
-                . ',' . $this->getAttribute('limit');
+                               .','.$this->getAttribute('limit');
         }
 
         if ($this->getAttribute('order')) {
@@ -286,8 +286,11 @@ class Pagination extends QUI\Control
      */
     public function setGetParams($name, $value)
     {
-        $name  = QUI\Utils\Security\Orthos::clear($name);
-        $value = QUI\Utils\Security\Orthos::clearFormRequest($value);
+        $name = QUI\Utils\Security\Orthos::clear($name);
+
+        if (!\is_numeric($value)) {
+            $value = QUI\Utils\Security\Orthos::clearFormRequest($value);
+        }
 
         if (empty($value)) {
             if (isset($this->getParams[$name])) {
@@ -308,9 +311,12 @@ class Pagination extends QUI\Control
      */
     public function setUrlParams($name, $value)
     {
-        $name  = QUI\Utils\Security\Orthos::clear($name);
-        $value = QUI\Utils\Security\Orthos::clear($value);
+        $name = QUI\Utils\Security\Orthos::clear($name);
 
+        if (!\is_numeric($value)) {
+            $value = QUI\Utils\Security\Orthos::clearFormRequest($value);
+        }
+        
         if (empty($value)) {
             if (isset($this->urlParams[$name])) {
                 unset($this->urlParams[$name]);
